@@ -10,9 +10,11 @@ extends Node3D
 
 @export_group("Rotation")
 @export var rotation_speed = 120
+@export var invert_horizontal: bool = false
+@export var invert_vertical: bool = false
 
 var camera_rotation:Vector3
-var zoom = 10
+var zoom = 10.0
 
 @onready var camera = $Camera
 
@@ -41,8 +43,13 @@ func handle_input(delta):
 	
 	var input := Vector3.ZERO
 	
-	input.y = Input.get_axis("camera_left", "camera_right")
-	input.x = Input.get_axis("camera_up", "camera_down")
+	input.y = Input.get_axis("camera_right", "camera_left")
+	input.x = Input.get_axis("camera_down", "camera_up")
+	
+	if invert_horizontal:
+		input.y *= -1
+	if invert_vertical:
+		input.x *= -1
 	
 	camera_rotation += input.limit_length(1.0) * rotation_speed * delta
 	camera_rotation.x = clamp(camera_rotation.x, -80, -10)

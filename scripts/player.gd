@@ -1,6 +1,6 @@
 extends CharacterBody3D
 
-signal coin_collected
+signal coin_collected(coins: int)
 
 @export_subgroup("Components")
 @export var view: Node3D
@@ -11,7 +11,7 @@ signal coin_collected
 
 var movement_velocity: Vector3
 var rotation_direction: float
-var gravity = 0
+var gravity = 0.0
 
 var previously_floored = false
 
@@ -100,6 +100,7 @@ func handle_effects(delta):
 			animation.speed_scale = 1.0
 			
 	elif animation.current_animation != "jump":
+		animation.speed_scale = 1.0
 		animation.play("jump", 0.1)
 
 # Handle movement input
@@ -136,7 +137,7 @@ func handle_gravity(delta):
 	if gravity > 0 and is_on_floor():
 
 		jump_single = true
-		gravity = 0
+		gravity = 0.0
 
 # Jumping
 
@@ -144,7 +145,7 @@ func jump():
 
 	Audio.play("res://sounds/jump.ogg")
 
-	gravity = -jump_strength
+	gravity = -float(jump_strength)
 
 	model.scale = Vector3(0.5, 1.5, 0.5)
 

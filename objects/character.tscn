@@ -23,5 +23,4 @@ transform = Transform3D(0.707107, -0.707107, 0, 0.707107, 0.707107, 0, 0, 0, 1, 
 transform = Transform3D(1, 0, 0, 0, 0.999999, 0, 0, 0, 0.999999, 0, 0.6, 0)
 
 [node name="AnimationPlayer" parent="." index="1"]
-deterministic = true
 playback_default_blend_time = 0.2
